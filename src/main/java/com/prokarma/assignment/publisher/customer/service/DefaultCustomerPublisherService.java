@@ -13,9 +13,9 @@ import com.prokarma.assignment.publisher.customer.exception.ApplicationRuntimeEx
 import com.prokarma.assignment.publisher.customer.kafka.domain.KafkaCustomerRequest;
 
 @Service
-public class DefaultCustomerService implements CustomerService {
+public class DefaultCustomerPublisherService implements CustomerPublisherService {
 
-    Logger logger = LoggerFactory.getLogger(DefaultCustomerService.class);
+    Logger logger = LoggerFactory.getLogger(DefaultCustomerPublisherService.class);
 
     @Autowired
     private KafkaTemplate<String, KafkaCustomerRequest> kafkaTemplate;

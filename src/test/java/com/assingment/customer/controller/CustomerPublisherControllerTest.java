@@ -20,17 +20,17 @@ import com.prokarma.assignment.publisher.customer.domain.CustomerAddress;
 import com.prokarma.assignment.publisher.customer.domain.CustomerRequest;
 import com.prokarma.assignment.publisher.customer.domain.CustomerStatus;
 import com.prokarma.assignment.publisher.customer.exception.GlobalExceptionHandler;
-import com.prokarma.assignment.publisher.customer.service.CustomerService;
+import com.prokarma.assignment.publisher.customer.service.CustomerPublisherService;
 import com.prokarma.assignment.publisher.customer.util.ObjectMapperUtil;
 
 @ExtendWith(MockitoExtension.class)
-class CustomerControllerTest {
+class CustomerPublisherControllerTest {
 
     @InjectMocks
     private CustomerPublisherController customerController;
 
     @Mock
-    private CustomerService customerService;
+    private CustomerPublisherService customerService;
     
     @Mock
     private DefaultCustomerPublisherRequestConverter defaultCustomerRequestConverter;

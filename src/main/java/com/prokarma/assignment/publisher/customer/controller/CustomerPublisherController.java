@@ -16,7 +16,7 @@ import com.prokarma.assignment.publisher.customer.converter.DefaultCustomerPubli
 import com.prokarma.assignment.publisher.customer.domain.CustomerRequest;
 import com.prokarma.assignment.publisher.customer.domain.CustomerResponse;
 import com.prokarma.assignment.publisher.customer.kafka.domain.KafkaCustomerRequest;
-import com.prokarma.assignment.publisher.customer.service.CustomerService;
+import com.prokarma.assignment.publisher.customer.service.CustomerPublisherService;
 
 @RestController
 @RequestMapping("/customer")
@@ -25,7 +25,7 @@ public class CustomerPublisherController {
     Logger logger = LoggerFactory.getLogger(CustomerPublisherController.class);
 
     @Autowired
-    private CustomerService customerService;
+    private CustomerPublisherService customerService;
 
     @Autowired
     private DefaultCustomerPublisherRequestConverter defaultCustomerRequestConverter;
