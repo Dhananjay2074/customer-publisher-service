@@ -1,4 +1,4 @@
-package com.assingment.customer.controller;
+package com.prokarma.assingment.publisher.customer.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -73,8 +73,8 @@ class CustomerPublisherControllerTest {
 
         CustomerRequest customerRequest = new CustomerRequest();
         customerRequest.setCustomerNumber("EE89878765");
-        customerRequest.setFirstName("Washington");
-        customerRequest.setLastName("Wellington");
+        customerRequest.setFirstName("dhananjay1");
+        customerRequest.setLastName("tiwari1234");
         customerRequest.setBirthdate("01-12-1980");
         customerRequest.setCountry("India");
         customerRequest.setCountryCode("IN");
