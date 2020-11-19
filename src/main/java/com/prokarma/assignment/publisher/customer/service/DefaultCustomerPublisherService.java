@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+import com.prokarma.assignment.publisher.customer.converter.DefaultCustomerPublisherRequestConverter;
+import com.prokarma.assignment.publisher.customer.domain.CustomerRequest;
 import com.prokarma.assignment.publisher.customer.domain.CustomerResponse;
 import com.prokarma.assignment.publisher.customer.exception.ApplicationRuntimeException;
 import com.prokarma.assignment.publisher.customer.kafka.domain.KafkaCustomerRequest;
@@ -22,15 +24,26 @@ public class DefaultCustomerPublisherService implements CustomerPublisherService
 
     @Value("${cloudkarafka.topic}")
     private String topic;
+    
+    @Autowired
+    private DefaultCustomerPublisherRequestConverter defaultCustomerRequestConverter;
+
 
     @Override
-    public CustomerResponse invokeCustomerResponse(KafkaCustomerRequest kafkaCustomerRequest) {
+    public CustomerResponse publishCustomerRequest(CustomerRequest customerRequest) {
 
         CustomerResponse response = null;
         long startingTime = System.currentTimeMillis();
 
         try {
+        	 KafkaCustomerRequest kafkaCustomerRequest =
+                     defaultCustomerRequestConverter.convert(customerRequest);
 
+             KafkaCustomerRequest maskedKafkaCustomerRequest =
+                     defaultCustomerRequestConverter.maskKafkaCustomerRequest(kafkaCustomerRequest);
+           
+            logger.info("Masked Kafaka Customer Request : {}", maskedKafkaCustomerRequest);
+            
             kafkaTemplate.send(topic, kafkaCustomerRequest);
 
             logger.info("Data published in time : {} ms",

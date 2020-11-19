@@ -38,7 +38,7 @@ class DefaultCustomerPublisherServiceTest {
     void testInvokeCustomerResponse() {
 
         CustomerResponse customerResponse =
-                defaultCustomerService.invokeCustomerResponse(getCustomerData());
+                defaultCustomerService.publishCustomerRequest(getCustomerData());
 
         assertEquals("success", customerResponse.getStatus());
     }
@@ -50,12 +50,12 @@ class DefaultCustomerPublisherServiceTest {
                 Mockito.any());
 
         assertThrows(ApplicationRuntimeException.class,
-                () -> defaultCustomerService.invokeCustomerResponse(null));
+                () -> defaultCustomerService.publishCustomerRequest(null));
     }
 
-    private KafkaCustomerRequest getCustomerData() {
+    private CustomerRequest getCustomerData() {
 
-        KafkaCustomerRequest customerRequest = new KafkaCustomerRequest();
+        CustomerRequest customerRequest = new CustomerRequest();
         customerRequest.setCustomerNumber("EE89878765");
         customerRequest.setFirstName("dhananjay1");
         customerRequest.setLastName("tiwari1234");
@@ -64,7 +64,7 @@ class DefaultCustomerPublisherServiceTest {
         customerRequest.setCountryCode("IN");
         customerRequest.setMobileNumber("9898767654");
         customerRequest.setEmail("dhananjay@gmail.com");
-        customerRequest.setCustomerStatus(CustomerStatus.OPEN.name());
+        customerRequest.setCustomerStatus(CustomerStatus.OPEN);
 
         CustomerAddress address = new CustomerAddress();
         address.setAddressLine1("Line 1");
@@ -72,7 +72,7 @@ class DefaultCustomerPublisherServiceTest {
         address.setStreet("Street 5");
         address.setPostalCode("76767");
 
-        customerRequest.setAddress(address.toString());
+        customerRequest.setAddress(address);
 
         return customerRequest;
     }
