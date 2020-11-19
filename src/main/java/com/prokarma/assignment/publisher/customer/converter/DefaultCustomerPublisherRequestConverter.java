@@ -3,7 +3,7 @@ package com.prokarma.assignment.publisher.customer.converter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
-import com.prokarma.assignment.publisher.customer.constant.CustomerPublisherConstant;
+import com.prokarma.assignment.publisher.customer.constant.CustomerPublisherEnum;
 import com.prokarma.assignment.publisher.customer.domain.CustomerRequest;
 import com.prokarma.assignment.publisher.customer.kafka.domain.KafkaCustomerRequest;
 
@@ -37,16 +37,16 @@ public class DefaultCustomerPublisherRequestConverter
         BeanUtils.copyProperties(kafkaCustomerRequest, maskedKafkaCustomerRequest);
 
         maskedKafkaCustomerRequest.setCustomerNumber(kafkaCustomerRequest.getCustomerNumber()
-                .replaceAll(CustomerPublisherConstant.CUSTOMER_NUMBER_REGEX.getValue(),
-                        CustomerPublisherConstant.REPLACEMENT_CHARACTER.getValue()));
+                .replaceAll(CustomerPublisherEnum.CUSTOMER_NUMBER_REGEX.getValue(),
+                        CustomerPublisherEnum.REPLACEMENT_CHARACTER.getValue()));
 
         maskedKafkaCustomerRequest.setEmail(kafkaCustomerRequest.getEmail().replaceFirst(
-                CustomerPublisherConstant.EMAIL_REGEX.getValue(),
-                CustomerPublisherConstant.EMAIL_REPLACEMENT_CHARACTER.getValue()));
+                CustomerPublisherEnum.EMAIL_REGEX.getValue(),
+                CustomerPublisherEnum.EMAIL_REPLACEMENT_CHARACTER.getValue()));
 
         maskedKafkaCustomerRequest.setBirthdate(kafkaCustomerRequest.getBirthdate().replaceAll(
-                CustomerPublisherConstant.BIRTHDATE_REGEX.getValue(),
-                CustomerPublisherConstant.REPLACEMENT_CHARACTER.getValue()));
+                CustomerPublisherEnum.BIRTHDATE_REGEX.getValue(),
+                CustomerPublisherEnum.REPLACEMENT_CHARACTER.getValue()));
 
         return maskedKafkaCustomerRequest;
     }

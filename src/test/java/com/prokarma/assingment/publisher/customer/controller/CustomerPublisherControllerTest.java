@@ -46,7 +46,7 @@ class CustomerPublisherControllerTest {
 
     @Test
     void testSaveCustomerData() throws Exception {
-        mockMvc.perform(post("/customer/save").contentType(MediaType.APPLICATION_JSON_VALUE)
+        mockMvc.perform(post("/customer/publish").contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(ObjectMapperUtil.returnJsonFromObject(getCustomerData()))
                 .headers(buildHttpHeaders())).andExpect(status().is(200));
 
@@ -54,7 +54,7 @@ class CustomerPublisherControllerTest {
 
     @Test
     void testSaveCustomerDataWhenWrongUrlPrivideThenReturn404StatusCode() throws Exception {
-        mockMvc.perform(post("/customer/save/v1").contentType(MediaType.APPLICATION_JSON_VALUE)
+        mockMvc.perform(post("/customer/publish/v1").contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(ObjectMapperUtil.returnJsonFromObject(getCustomerData()))
                 .headers(buildHttpHeaders())).andExpect(status().is(404));
 
